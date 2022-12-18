@@ -14,22 +14,24 @@ def startNewGame(homeTeam, awayTeam, startTime):
     with con:
         con.executemany(sql, data)    
 
-
-# startNewGame("E","F","2022-12-18 21:59")
-
 def updateScore(matchID, homeScoreUpdate, awayScoreUpdate):
     #function to update the score of match, basing on matchID (primary key) it updates the home score and away score
-    sql2 = 'UPDATE SCOREBOARD SET homeScore = ?, awayScore=? where id = ?;'
-    data2 = [homeScoreUpdate,awayScoreUpdate,matchID]
+    sql = 'UPDATE SCOREBOARD SET homeScore = ?, awayScore=? where id = ?;'
+    data = [homeScoreUpdate,awayScoreUpdate,matchID]
     with con:
-        con.execute(sql2, data2)            
+        con.execute(sql, data)            
 
 
+def viewScoreBoard():
+    #function to show current games in progress ordered by these with most total score and last started
+    with con:
+        data = con.execute("SELECT a.*, homeScore+awayScore as totalScore FROM SCOREBOARD a order by homeScore+awayScore desc, date(addedTime) desc")
+        for row in data:
+            print(row)    
+
+
+# startNewGame("E","F","2022-12-18 21:59")
 #updateScore(1,1,5)
 
-
 print ("--------------- \n")
-with con:
-    data = con.execute("SELECT a.*, homeScore+awayScore as totalScore FROM SCOREBOARD a order by homeScore+awayScore desc, date(addedTime) desc")
-    for row in data:
-        print(row)
+viewScoreBoard()
