@@ -6,10 +6,10 @@ con = sl.connect('scoreboard_db.db')
 #     con.execute("""
 #         CREATE TABLE SCOREBOARD (
 #             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-#             homeTeam TEXT UNIQUE,
-#             homeScore INTEGER,
-#             awayTeam TEXT UNIQUE,
-#             awayScore INTEGER,
+#             homeTeam  NOT NULL TEXT UNIQUE,
+#             homeScore  NOT NULL INTEGER,
+#             awayTeam  NOT NULL TEXT UNIQUE,
+#             awayScore  NOT NULLINTEGER,
 #             addedTime TEXT
 #         );
 #     """)
@@ -18,10 +18,10 @@ con = sl.connect('scoreboard_db.db')
 #     con.execute("""
 #         CREATE TABLE ARCHIVE (
 #             id INTEGER NOT NULL PRIMARY KEY,
-#             homeTeam TEXT,
-#             homeScore INTEGER,
-#             awayTeam TEXT,
-#             awayScore INTEGER,
+#             homeTeam  NOT NULL TEXT,
+#             homeScore  NOT NULL INTEGER,
+#             awayTeam  NOT NULL TEXT,
+#             awayScore  NOT NULL INTEGER,
 #             addedTime TEXT
 #         );
 #     """)
