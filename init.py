@@ -17,7 +17,7 @@ con = sl.connect('scoreboard_db.db')
 # with con:
 #     con.execute("""
 #         CREATE TABLE ARCHIVE (
-#             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+#             id INTEGER NOT NULL PRIMARY KEY,
 #             homeTeam TEXT,
 #             homeScore INTEGER,
 #             awayTeam TEXT,

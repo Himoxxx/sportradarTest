@@ -25,13 +25,25 @@ def updateScore(matchID, homeScoreUpdate, awayScoreUpdate):
 def viewScoreBoard():
     #function to show current games in progress ordered by these with most total score and last started
     with con:
-        data = con.execute("SELECT a.*, homeScore+awayScore as totalScore FROM SCOREBOARD a order by homeScore+awayScore desc, date(addedTime) desc")
+        data = con.execute('SELECT a.*, homeScore+awayScore as totalScore FROM SCOREBOARD a order by homeScore+awayScore desc, date(addedTime) desc')
         for row in data:
             print(row)    
+
+def finishGame(matchID):
+    #function to move game to archive and remove that record from scoreboard using ID (primary key) of scoreboard
+    sql1 = 'INSERT INTO ARCHIVE SELECT * FROM SCOREBOARD WHERE id = ? ;'
+    sql2 = 'DELETE FROM SCOREBOARD WHERE id = ? ;'
+    data = [matchID]
+    with con:
+        con.execute(sql1, data)   
+        con.execute(sql2, data) 
+
+    
 
 
 # startNewGame("E","F","2022-12-18 21:59")
 #updateScore(1,1,5)
+#finishGame(1)
 
 print ("--------------- \n")
 viewScoreBoard()
